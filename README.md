@@ -1,6 +1,9 @@
 # betrihagvisar
 
-**Hagvísar, freed from the page.** An interactive web version of the *Hagvísar* report from Seðlabanki Íslands: ten Roman-numeral chapters, numbered figures, notes and sources, plus search and filters, spotlight view, drag-and-drop arrangement, personal figure sets, simulated electronic-ID login and simulated e-mail updates.
+**Hagvísar** Gagnvirkir Hagvísar sýna helstu hagtölur Íslands í tíu köflum.
+Fyrirvari: Þessi síða er sjálfstætt verkefni og er ekki á vegum Seðlabanka Íslands eða tengt honum með öðrum hætti. Öll vörumerki, merki og gögn eru eign viðkomandi rétthafa, þar á meðal Seðlabanka Íslands. Hugmyndin með verkefninu er aðallega að sýna hvernig mætti útfæra Gagnvirka Hagvísa á betri máta.
+
+Forritað í React, TypeScript og Vite með Claude Code. Myndir eru teiknaðar með Apache ECharts og röðun notar dnd-kit. Gögn koma úr Excel skjölum af síðu Seðlabankans, sem síðan eru færð á JSON form með Python scriptum. Vefurinn sækir gögn hverrar myndar í þessi skjöl þegar hún birtist (lazy loading). Söfn og stillingar eru vistuð í vafranum (localStorage).
 
 > **The figures show Seðlabanki's published numbers** (the "Tölur í myndir" workbooks for each chapter), converted to JSON by `scripts/hagvisar/build_data.py`. Login and e-mail are still simulated; nothing leaves the browser.
 
@@ -42,18 +45,6 @@ Open the URL Vite prints (by default `http://localhost:5173/betrihagvisar/`).
 npm run build     # type-check + production build into dist/
 npm run preview   # serve dist/ locally
 ```
-
-## Deploy to GitHub Pages (project repository)
-
-The app is configured to live at `https://<user>.github.io/betrihagvisar/`, separate from your main `<user>.github.io` site.
-
-1. Create a repository named **`betrihagvisar`** and push this project to the `main` branch.
-2. In the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. The included workflow (`.github/workflows/deploy.yml`) builds and deploys on every push to `main`. It sets the base path from the repository name, so renaming the repo still works.
-
-Routing uses hash URLs (`…/betrihagvisar/#/figure/I-1`), so deep links work on Pages without any 404 fallback.
-
-To host somewhere else, build with a different base path, e.g. `VITE_BASE=/ npm run build`.
 
 ## What to try
 
