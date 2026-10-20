@@ -10,6 +10,7 @@ import { ChapterRail, ChapterSelect } from "../components/ChapterNav";
 import { FigureGrid } from "../components/FigureGrid";
 import { FilterDrawer } from "../components/FilterDrawer";
 import { IconFilter } from "../components/Icons";
+import { PdfDownloadButton } from "../components/PdfDownloadButton";
 import { NotFoundPage } from "./NotFoundPage";
 
 /* Survive unmounts so "Til baka" from a spotlight returns to the same place. */
@@ -197,6 +198,7 @@ export function ChapterStreamPage() {
       </div>
 
       <FilterDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} filters={local} onApply={onApply} />
+      <PdfDownloadButton />
     </div>
   );
 }

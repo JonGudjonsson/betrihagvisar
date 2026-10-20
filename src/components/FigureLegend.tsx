@@ -41,15 +41,24 @@ function Swatch({ figure, s }: { figure: FigureDefinition; s: SeriesDefinition }
   );
 }
 
+/** Series shown in the legend (none for a single-series category chart). Shared with the PDF export. */
+export function legendSeries(figure: FigureDefinition, transform: Transform): SeriesDefinition[] {
+  if (figure.chartType === "table") return [];
+  const defs = visibleSeriesDefs(figure, transform).filter((s) => !s.hideInLegend);
+  return figure.xType === "category" && defs.length <= 1 ? [] : defs;
+}
+
+/** As in the report: name the axis when the figure has two. */
+export function legendLabel(figure: FigureDefinition, s: SeriesDefinition): string {
+  const dual = figure.series.some((x) => x.axis === "right") && figure.series.some((x) => x.axis !== "right");
+  return dual && !/ás\)$/.test(s.name) ? `${s.name} (${s.axis === "right" ? "h" : "v"}. ás)` : s.name;
+}
+
 /** Legend below the plot. Interactive (toggles series) in spotlight mode. */
 export function FigureLegend({ figure, transform, hidden = [], onToggle }: Props) {
-  if (figure.chartType === "table") return null;
-  const defs = visibleSeriesDefs(figure, transform).filter((s) => !s.hideInLegend);
-  if (figure.xType === "category" && defs.length <= 1) return null;
+  const defs = legendSeries(figure, transform);
   if (defs.length === 0) return null;
-  // As in the report: name the axis when the figure has two.
-  const dual = figure.series.some((s) => s.axis === "right") && figure.series.some((s) => s.axis !== "right");
-  const label = (s: SeriesDefinition) => (dual && !/ás\)$/.test(s.name) ? `${s.name} (${s.axis === "right" ? "h" : "v"}. ás)` : s.name);
+  const label = (s: SeriesDefinition) => legendLabel(figure, s);
 
   return (
     <ul className={`legend${onToggle ? " legend--interactive" : ""}`} aria-label="Skýringar">

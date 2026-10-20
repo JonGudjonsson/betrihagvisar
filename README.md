@@ -30,6 +30,8 @@ Each sheet carries its metadata in labelled rows (Fs. title, Ufs. subtitle, Nm. 
 
 The workbooks contain no chart definitions. How each figure is drawn (lines, bars, stacking, areas, colours, second axis) lives in `src/data/figureStyles.ts`, taken from the printed report (`docs/HV_desember 2022.pdf`), keyed by figure id and series position. Figures without an entry get sensible defaults.
 
+**PDF export.** `src/pdf/` lays the figures out as in the 2022 report (two columns, three rows a page; unlike the original, every chapter starts on a new page) and draws them with jsPDF; charts are rendered by ECharts as SVG and kept as vectors (svg2pdf.js). The covers are pages 1 and 42 of the 2022 report (`public/pdf/hv-covers.pdf`, made with `mutool merge -o public/pdf/hv-covers.pdf "docs/HV_desember 2022.pdf" 1,42`); pdf-lib puts them around the generated pages and replaces the old "2022|4" with the generation date. Fonts: Open Sans (`public/pdf/fonts`, SIL Open Font License). The libraries load only when the button is pressed.
+
 **Updating.** A new release only needs new URLs in `sources.json`. An update service can run `build_data.py --check || build_data.py` on a schedule and commit or upload `public/data`; the site picks up new JSON without a rebuild.
 
 ## Run locally
@@ -54,6 +56,7 @@ npm run preview   # serve dist/ locally
 | Síur og leit drawer (search, chapters, period coverage, frequency, type, source) | *Síur og leit* below the chapter rail |
 | Arrange mode (drag handle, keyboard, or ··· menu: Færa fremst/ofar/neðar/aftast) | Set → *Raða myndum* (own sets only; the chapters keep the report's order) |
 | Spotlight: period, series, rebasing of index figures, frequency, CSV, shareable link | ↗ on any figure, or click its title |
+| The whole report as a printed-style PDF (cover, contents, all figures, each chapter from a new page, back cover; contents rows and bookmarks link to the chapters), built in the browser in about 10 s with progress shown in the button | *SÆKJA SEM PDF* button, lower right on the chapter page |
 | Demo login (3 identities with different states) | *Skrá inn* |
 | Personal sets, aðalmynd, add figures, rename, delete | *Mín söfn* |
 | Update subscriptions + "Herma eftir uppfærslu" test tool | Set → *Uppfærslur*, or the *Uppfærslur* page |

@@ -14,6 +14,8 @@ const FONT = "'Open Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 
 export interface BuildOptions {
   detailed: boolean;
   animate: boolean;
+  /** Font for chart text; the PDF export passes the font it has embedded. */
+  fontFamily?: string;
 }
 
 export function valueSuffix(unit: string): string {
@@ -162,7 +164,7 @@ export function isShareOfTotal(fig: FigureDefinition): boolean {
 }
 
 function valueAxes(fig: FigureDefinition, cv: ComputedView, hasRight: boolean, o: BuildOptions, fontSize: number) {
-  const axisLabel = { color: MUTED, fontSize, fontFamily: FONT };
+  const axisLabel = { color: MUTED, fontSize, fontFamily: o.fontFamily ?? FONT };
   const forcesZero = (side: "left" | "right") =>
     cv.series.some((s) => (s.def.axis ?? "left") === side && (s.def.kind === "bar" || (s.def.kind === "area" && !!s.def.stack)));
   const base = {
@@ -195,10 +197,11 @@ function valueAxes(fig: FigureDefinition, cv: ComputedView, hasRight: boolean, o
 export function buildOption(fig: FigureDefinition, cv: ComputedView, o: BuildOptions): EChartsCoreOption {
   const suffix = valueSuffix(cv.unit);
   const fontSize = o.detailed ? 12 : 11;
+  const font = o.fontFamily ?? FONT;
   const anim = o.animate
     ? { animation: true, animationDuration: 0, animationDurationUpdate: 220, animationEasingUpdate: "cubicOut" as const }
     : { animation: false };
-  const axisLabel = { color: MUTED, fontSize, fontFamily: FONT };
+  const axisLabel = { color: MUTED, fontSize, fontFamily: font };
   const hasRight = cv.series.some((s) => s.def.axis === "right") && cv.series.some((s) => s.def.axis !== "right");
   const grid = o.detailed
     ? { left: 6, right: hasRight ? 6 : 18, top: 14, bottom: 6, containLabel: true }
@@ -226,7 +229,7 @@ export function buildOption(fig: FigureDefinition, cv: ComputedView, o: BuildOpt
     );
     return {
       ...anim,
-      textStyle: { fontFamily: FONT },
+      textStyle: { fontFamily: font },
       grid: { ...grid, bottom: few ? 4 : grid.bottom },
       tooltip: {
         ...baseTooltip,
@@ -335,7 +338,7 @@ export function buildOption(fig: FigureDefinition, cv: ComputedView, o: BuildOpt
 
   return {
     ...anim,
-    textStyle: { fontFamily: FONT },
+    textStyle: { fontFamily: font },
     grid,
     tooltip,
     xAxis,

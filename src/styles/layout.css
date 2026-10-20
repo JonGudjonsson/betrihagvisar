@@ -645,3 +645,91 @@ main {
 .stream-controls .select-inline {
   white-space: nowrap;
 }
+
+/* ---------------- "Sækja sem PDF" (chapter page) ---------------- */
+
+.pdf-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 52px;
+  max-width: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--hv-green);
+  color: #fff;
+  font-family: var(--font-brand);
+  box-shadow: var(--shadow-pop);
+  cursor: pointer;
+  transition:
+    max-width 240ms var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+.pdf-fab:hover,
+.pdf-fab:focus-visible,
+.pdf-fab.is-busy {
+  max-width: 280px;
+}
+
+.pdf-fab:hover {
+  background: #006e56;
+}
+
+.pdf-fab:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.pdf-fab.is-busy {
+  cursor: progress;
+}
+
+/* progress fills the button from the left */
+.pdf-fab__fill {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.24);
+  transform-origin: left center;
+  transition: transform 180ms linear;
+}
+
+.pdf-fab__label {
+  position: relative;
+  padding-left: 20px;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: opacity var(--t-med) var(--ease);
+}
+
+.pdf-fab:hover .pdf-fab__label,
+.pdf-fab:focus-visible .pdf-fab__label,
+.pdf-fab.is-busy .pdf-fab__label {
+  opacity: 1;
+}
+
+.pdf-fab__icon {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+}
+
+@media (max-width: 699px) {
+  .pdf-fab {
+    right: 16px;
+    bottom: 16px;
+  }
+}
