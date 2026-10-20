@@ -29,7 +29,7 @@ export function OverviewPage() {
             <p>
               Gagnvirkir Hagvísar sýna helstu hagtölur Íslands í tíu köflum.
               <br />
-              <strong>Fyrirvari:</strong> Þessi síða er sjálfstætt verkefni og er ekki á vegum Seðlabanka Íslands eða tengt honum með öðrum hætti. Öll vörumerki, merki og gögn eru eign viðkomandi rétthafa, þar á meðal Seðlabanka Íslands. Hugmyndin með verkefninu er aðallega að sína hvernig mætti útfæra Gagnvirka Hagvísa á betri máta.
+              <strong>Fyrirvari:</strong> Þessi síða er sjálfstætt verkefni og er ekki á vegum Seðlabanka Íslands eða tengt honum með öðrum hætti. Öll vörumerki, merki og gögn eru eign viðkomandi rétthafa, þar á meðal Seðlabanka Íslands. Hugmyndin með verkefninu er aðallega að sýna hvernig mætti útfæra Gagnvirka Hagvísa á betri máta.
             </p>
             <p className="hv-home__meta">
               Tölur úr útgáfu {RELEASE.label} · {pluralFigures(FIGURES.length)} · <Link to="/search">Leita í öllum myndum</Link>
