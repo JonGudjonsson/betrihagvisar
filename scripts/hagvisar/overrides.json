@@ -1,0 +1,22 @@
+{
+  "_doc": "Per-figure parsing fixes keyed by figure id. Keys: skip (bool), x ('category'), dataRow (1-based first data row), dropColumns (series names, after numbering of duplicates), latestBlock (long-format sheet: keep the rows of the latest date, column B as categories), transpose (category sheet with years as columns), keepZeros (keep zeros at the end of series that would otherwise be read as missing values).",
+  "VII-29": {
+    "latestBlock": true
+  },
+  "III-22": {
+    "dropColumns": [
+      "Ferðaþjónusta (2)",
+      "Ál- og álafurðir (2)",
+      "Sjávarafurðir (2)",
+      "Annar útflutningur (2)"
+    ]
+  },
+  "IX-1": {
+    "transpose": true
+  },
+  "III-20": {
+    "dropColumns": [
+      "Útflutningsverðmæti sjávarafurða"
+    ]
+  }
+}

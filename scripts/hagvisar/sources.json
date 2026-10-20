@@ -1,0 +1,16 @@
+{
+  "release": "2026/september",
+  "releaseLabel": "september 2026",
+  "workbooks": {
+    "I": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-I-Verdlagsthroun-og-verdbolguvaentingar.xlsx",
+    "II": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-II-Framleidsla-og-eftirspurn.xlsx",
+    "III": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-III-Utanrikisvidskipti-og-ytri-skilyrdi.xlsx",
+    "IV": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-IV-Vinnumarkadur.xlsx",
+    "V": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-V-Opinber-fjarmal.xlsx",
+    "VI": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-VI-Eignamarkadir.xlsx",
+    "VII": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-VII-Heimili-og-fyrirtaeki.xlsx",
+    "VIII": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-VIII-Fjarmalamarkadir.xlsx",
+    "IX": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-IX-Fjarmalakerfid.xlsx",
+    "X": "https://sedlabanki.is/library/gagnatorg/hagtolur/hagvisar/2026/september/HV-Tolur-i-myndir-X-Altjodleg-efnahagsmal-og-erlendur-samanburdur.xlsx"
+  }
+}

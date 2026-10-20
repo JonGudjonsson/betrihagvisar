@@ -1,0 +1,460 @@
+/* ---------------- Grid ---------------- */
+
+.fig-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: 28px 24px;
+}
+
+.fig-grid__cell {
+  position: relative;
+  min-width: 0;
+}
+
+/* ---------------- Figure panel ---------------- */
+
+/* Figures follow the printed report: Open Sans, Hagvísar green ids, units above the axes. */
+.fig {
+  position: relative;
+  font-family: var(--font-brand);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  min-height: 330px;
+  padding: 16px 16px 14px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-fig);
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.fig:hover,
+.fig:focus-within {
+  border-color: var(--line-strong);
+}
+
+.fig--set {
+  border-color: var(--line-faint);
+}
+
+.fig__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.fig__titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.fig__id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--hv-green);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.fig__chapter {
+  color: var(--text-tertiary);
+  font-weight: 400;
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fig__updated {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--series-2);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.fig__updated .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--series-2);
+}
+
+.fig__title {
+  margin-top: 4px;
+  font-family: var(--font-brand);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--hv-text);
+  text-wrap: balance;
+}
+
+.fig__title a {
+  text-decoration: none;
+}
+
+.fig__title a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 4px;
+}
+
+.fig__subtitle {
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 17px;
+  color: var(--text-secondary);
+}
+
+.fig__units {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 2px;
+  font-family: var(--font-brand);
+  font-size: 11.5px;
+  line-height: 15px;
+  color: #6d6e71;
+}
+
+.fig__units-right {
+  text-align: right;
+}
+
+.fig__actions {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: -6px -8px 0 0;
+  opacity: 0.6;
+  transition: opacity var(--t-fast) var(--ease);
+}
+
+.fig:hover .fig__actions,
+.fig:focus-within .fig__actions,
+.fig__actions:has([aria-expanded="true"]) {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .fig__actions {
+    opacity: 1;
+  }
+}
+
+.fig__meta {
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 11.5px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+.fig__meta p + p {
+  margin-top: 1px;
+}
+
+.fig--wide {
+  min-height: 0;
+}
+
+.fig--wide .fig__title {
+  font-size: 19px;
+  line-height: 25px;
+}
+
+/* ---------------- Chart frame ---------------- */
+
+/* The plot takes any extra height a card gets from its grid row (cards in a row share
+   the tallest card's height), so the slack is not left between legend and footnote. */
+.chart-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.chart-frame > * {
+  flex: 1 1 auto;
+}
+
+.echart {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.echart__host {
+  position: absolute;
+  inset: 0;
+}
+
+.chart-skeleton {
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0, transparent 39px, var(--line-faint) 39px, var(--line-faint) 40px),
+    linear-gradient(90deg, var(--surface-subtle) 0%, #fbfcfb 50%, var(--surface-subtle) 100%);
+  background-size:
+    100% 100%,
+    200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position:
+      0 0,
+      100% 0;
+  }
+  to {
+    background-position:
+      0 0,
+      -100% 0;
+  }
+}
+
+.chart-message {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+  border: 1px dashed var(--line);
+  border-radius: 2px;
+}
+
+/* Tooltip (rendered by ECharts inside the chart container) */
+
+.hv-tt {
+  font-family: var(--font-ui);
+  min-width: 160px;
+}
+
+.hv-tt__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.hv-tt table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.hv-tt td {
+  padding: 1px 0;
+  font-size: 12px;
+  line-height: 17px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.hv-tt__v {
+  text-align: right;
+  padding-left: 18px !important;
+  color: var(--text-primary) !important;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.hv-tt__sw {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  margin-right: 7px;
+  vertical-align: 0;
+}
+
+/* ---------------- Legend ---------------- */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 8px;
+}
+
+.legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  line-height: 17px;
+  color: var(--text-primary);
+}
+
+.legend--interactive .legend__item {
+  border: 0;
+  background: none;
+  padding: 4px 6px;
+  margin: 0 -6px;
+  border-radius: 4px;
+  min-height: 30px;
+}
+
+.legend--interactive .legend__item:hover {
+  background: var(--surface-subtle);
+}
+
+.legend__item.is-off {
+  color: var(--text-tertiary);
+}
+
+.legend__item.is-off .legend__sw {
+  opacity: 0.25;
+}
+
+.legend__item.is-off span {
+  text-decoration: line-through;
+  text-decoration-color: var(--line-strong);
+}
+
+/* ---------------- Table figures ---------------- */
+
+.fig-table-wrap {
+  overflow-x: auto;
+}
+
+.fig-table {
+  width: 100%;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.fig-table th,
+.fig-table td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line-faint);
+  text-align: left;
+  font-weight: 400;
+}
+
+.fig-table thead th {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.fig-table tbody th {
+  font-weight: 500;
+}
+
+.fig-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.fig-table tr.is-highlight th,
+.fig-table tr.is-highlight td {
+  background: rgba(228, 122, 46, 0.08);
+}
+
+.fig-table tr.is-highlight th {
+  box-shadow: inset 2px 0 0 var(--series-2);
+}
+
+/* ---------------- Arrange mode ---------------- */
+
+.fig--arrange {
+  border-color: var(--line-strong);
+}
+
+.fig--arrange:hover {
+  border-color: var(--text-tertiary);
+}
+
+.fig--arrange .chart-frame {
+  pointer-events: none;
+}
+
+.drag-handle {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 44px;
+  margin: -8px 2px 0 -8px;
+  border: 0;
+  border-radius: var(--r-ctl);
+  background: none;
+  color: var(--text-secondary);
+  cursor: grab;
+  touch-action: none;
+}
+
+.drag-handle:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.drag-handle:active,
+.drag-handle.is-grabbing {
+  cursor: grabbing;
+  color: var(--accent);
+}
+
+.fig-grid__cell.is-dragging > .fig {
+  visibility: hidden;
+}
+
+.drop-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 1.5px dashed var(--accent);
+  border-radius: var(--r-fig);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.drag-preview {
+  transform: scale(1.015);
+  transform-origin: 30px 30px;
+  box-shadow: var(--shadow-float);
+  border-radius: var(--r-fig);
+  cursor: grabbing;
+}
+
+.drag-preview .fig {
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drag-preview {
+    transform: none;
+  }
+}
+
+/* ---------------- Sparkline ---------------- */
+
+.sparkline {
+  flex: none;
+}
+
+.chart-message--unavailable {
+  border-style: solid;
+  border-color: var(--line-faint);
+  background: var(--surface-subtle);
+  padding: 0 24px;
+  max-width: none;
+}
