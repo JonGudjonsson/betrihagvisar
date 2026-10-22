@@ -25,11 +25,17 @@ export function OverviewPage() {
             ))}
           </ol>
 
+          <aside className="hv-home__disclaimer" role="note" aria-label="Mikilvægur fyrirvari">
+            <p className="hv-home__disclaimer-title">Þetta er ekki opinber vefsíða Seðlabanka Íslands.</p>
+            <p>
+              Þetta er sjálfstætt verkefni og hvorki á vegum Seðlabankans né tengt honum. Vörumerki, merki og gögn eru eign viðkomandi rétthafa, þar á meðal Seðlabanka Íslands.
+            </p>
+          </aside>
+
           <div className="hv-home__text">
             <p>
               Gagnvirkir Hagvísar sýna helstu hagtölur Íslands í tíu köflum.
-              <br />
-              <strong>Fyrirvari:</strong> Þessi síða er sjálfstætt verkefni og er ekki á vegum Seðlabanka Íslands eða tengt honum með öðrum hætti. Öll vörumerki, merki og gögn eru eign viðkomandi rétthafa, þar á meðal Seðlabanka Íslands. Hugmyndin með verkefninu er aðallega að sýna hvernig mætti útfæra Gagnvirka Hagvísa á betri máta.
+              {" "}Hugmyndin með verkefninu er aðallega að sýna hvernig mætti útfæra Gagnvirka Hagvísa á betri máta.
             </p>
             <p className="hv-home__meta">
               Tölur úr útgáfu {RELEASE.label} · {pluralFigures(FIGURES.length)} · <Link to="/search">Leita í öllum myndum</Link>
